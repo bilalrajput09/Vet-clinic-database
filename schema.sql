@@ -64,3 +64,20 @@ PRIMARY KEY (animal_id, vet_id, visit_date),
 FOREIGN KEY (animal_id) REFERENCES animals(id),
 FOREIGN KEY (vet_id) REFERENCES vets(id)
 );
+
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- Drop Primary Key constraints
+ALTER TABLE visits DROP CONSTRAINT visits_pkey;
+
+-- Add Index to animal_id column
+CREATE INDEX idx_visits_animal_id ON visits (animal_id);
+
+-- Add Index to vet_id column
+CREATE INDEX idx_visits_vet_id ON visits (vet_id);
+
+-- Add Index to email column
+CREATE INDEX idx_visits_email ON visits (email);
+
