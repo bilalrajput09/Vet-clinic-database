@@ -22,3 +22,18 @@ create table invoices ( id int primary key not null generated always as identity
 	payed_At timestamp not null,
 	medical_history_id int references medical_histories(id) ON DELETE CASCADE,
    );
+
+create table invoice_items (
+	id int primary key not null generated always as identity,
+	unit_price decimal not null,
+	quanitity int not null,
+	total_price decimal not null,
+	invoice_id int references invoices(id) ON DELETE CASCADE,
+	treatment_id int references treatments(id) ON DELETE CASCADE 
+);
+
+create table mb_history_and_treatments (
+	id serial primary key,
+	md_history_id int references medical_histories(id),
+	treatments_id int references treatments(id)
+);
